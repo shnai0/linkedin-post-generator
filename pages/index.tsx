@@ -1,11 +1,23 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
-
-const inter = Inter({ subsets: ['latin'] })
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { Button } from "@/components/Button";
+import { Tweet } from "@/components/Tweet";
+import { Ranking } from "@/components/Ranking";
+import { rank } from "@/lib/twitter-algorithm";
 
 export default function Home() {
+  const [ranking, setRanking] = useState<RankResponse>({
+    score: 0,
+    validations: [],
+  });
+  const [tweet, setTweet] = useState<string>("");
+  useEffect(() => {
+    const rankResponse = rank(tweet);
+    setRanking(rankResponse);
+  }, [tweet]);
+
   return (
     <>
       <Head>
@@ -14,110 +26,117 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <div className={styles.description}>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>pages/index.tsx</code>
-          </p>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
+
+      <main>
+        <nav className="bg-blue-500 text-white">
+          <div className="px-5">
+            <div className="max-w-5xl mx-auto">
+              <div className="flex justify-between items-center h-16">
+                <div className="wordmark flex items-center text-base">
+                  <svg
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    className="mr-2"
+                  >
+                    <title>twitter</title>
+                    <path
+                      fill="currentColor"
+                      d="M20 4.422c-0.734 0.328-1.527 0.547-2.355 0.645 0.848-0.508 1.496-1.313 1.805-2.27-0.793 0.469-1.672 0.812-2.605 0.996-0.75-0.797-1.816-1.293-2.996-1.293-2.266 0-4.102 1.836-4.102 4.102 0 0.32 0.035 0.633 0.105 0.934-3.41-0.172-6.434-1.805-8.457-4.289-0.352 0.605-0.555 1.313-0.555 2.062 0 1.422 0.723 2.68 1.824 3.414-0.672-0.020-1.305-0.207-1.859-0.512 0 0.016 0 0.035 0 0.051 0 1.988 1.414 3.648 3.293 4.023-0.344 0.094-0.707 0.145-1.082 0.145-0.266 0-0.52-0.027-0.773-0.074 0.523 1.629 2.039 2.816 3.832 2.852-1.406 1.102-3.172 1.758-5.098 1.758-0.332 0-0.656-0.020-0.98-0.059 1.82 1.168 3.977 1.844 6.293 1.844 7.547 0 11.676-6.254 11.676-11.676 0-0.18-0.004-0.355-0.012-0.531 0.801-0.574 1.496-1.297 2.047-2.121z"
+                    ></path>
+                  </svg>
+                  Developer
+                </div>
+                <div>
+                  <ul className="flex">
+                    <li className="ml-8">
+                      <a
+                        target="_blank"
+                        href="https://github.com/mfts/twitter-algorithm-ai/blob/main/lib/algorithm.ts"
+                        rel="noreferrer"
+                        className="text-white"
+                      >
+                        View Algorithm
+                      </a>
+                    </li>
+                    <li className="ml-8">
+                      <a
+                        target="_blank"
+                        href="https://github.com/coryetzkorn/twitter-algorithm"
+                        rel="noreferrer"
+                        className="text-white"
+                      >
+                        Contribute
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-
-        <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
-          <div className={styles.thirteen}>
-            <Image
-              src="/thirteen.svg"
-              alt="13"
-              width={40}
-              height={31}
-              priority
-            />
+        </nav>
+        <section className="py-10 lg:py-20">
+          <div className="px-5">
+            <div className="max-w-5xl mx-auto">
+              <h1 className="text-2xl pb-5 border-b border-gray-300">
+                Algorithm Rank Validator
+              </h1>
+              <p className="my-4 md:my-8">
+                See how your tweet performs against{" "}
+                <a
+                  target="_blank"
+                  href="https://github.com/coryetzkorn/twitter-algorithm/blob/main/lib/algorithm.ts"
+                  rel="noreferrer"
+                  className="text-blue-500 hover:text-blue-600"
+                >
+                  the open source Twitter algorithm
+                </a>
+                .
+              </p>
+              <div className="sides grid md:grid-cols-2 gap-16">
+                <div className="side">
+                  <h2 className="text-xl pb-4 border-b border-gray-300">
+                    Your Tweet
+                  </h2>
+                  <div className="max-w-2xl my-8 mx-auto">
+                    <Tweet tweet={tweet} setTweet={setTweet} />
+                  </div>
+                  <div className="md:hidden">
+                    <Button
+                      onClick={() =>
+                        window.scrollTo(0, document.body.scrollHeight)
+                      }
+                    >
+                      See Ranking
+                    </Button>
+                  </div>
+                </div>
+                <div className="side">
+                  <h2 className="text-xl pb-4 border-b border-gray-300">
+                    Your Ranking
+                  </h2>
+                  <div className="pt-8">
+                    <Ranking ranking={ranking} />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-
-        <div className={styles.grid}>
+        </section>
+        <div className="m-5 text-uppercase text-xs text-gray-700 md:absolute md:right-5 md:bottom-5 md:m-0">
+          By{" "}
           <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
             target="_blank"
-            rel="noopener noreferrer"
+            href="https://twitter.com/mfts0"
+            rel="noreferrer"
+            className="text-blue-500 hover:text-blue-600"
           >
-            <h2 className={inter.className}>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
+            @mfts0
           </a>
         </div>
       </main>
     </>
-  )
+  );
 }

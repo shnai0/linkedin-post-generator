@@ -12,11 +12,23 @@
     "@types/node": "18.15.11",
     "@types/react": "18.0.31",
     "@types/react-dom": "18.0.11",
+    "@vercel/analytics": "^0.1.11",
+    "classnames": "^2.3.2",
     "eslint": "8.37.0",
     "eslint-config-next": "13.2.4",
+    "languagedetect": "^2.0.0",
+    "lodash": "^4.17.21",
     "next": "13.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "sentiment": "^5.0.2",
     "typescript": "5.0.3"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.192",
+    "@types/sentiment": "^5.0.1",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.3.1"
   }
 }
