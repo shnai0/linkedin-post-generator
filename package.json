@@ -16,11 +16,13 @@
     "classnames": "^2.3.2",
     "eslint": "8.37.0",
     "eslint-config-next": "13.2.4",
+    "eventsource-parser": "^1.0.0",
     "languagedetect": "^2.0.0",
     "lodash": "^4.17.21",
     "next": "13.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hot-toast": "^2.4.0",
     "sentiment": "^5.0.2",
     "typescript": "5.0.3"
   },

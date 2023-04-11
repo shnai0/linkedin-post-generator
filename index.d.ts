@@ -11,6 +11,7 @@ interface RankResponse {
 interface Rank {
   score: number;
   message?: string;
+  type?: "positive" | "negative";
 }
 
 interface AnalysisResult {
@@ -24,9 +25,9 @@ interface AnalysisResult {
   positive: string[];
   negative: string[];
 }
-interface TweetData {
-  tweet: string;
-  originalTweet: string;
+interface PostData {
+  post: string;
+  originalPost: string;
   sentiment: AnalysisResult;
-  has_media: boolean;
+  postMedia: boolean;
 }

@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { Dispatch, PropsWithChildren, SetStateAction } from "react";
+import { Button } from "@/components/Button";
 
 type RankingProps = {
   ranking: RankResponse;
@@ -12,8 +13,9 @@ export const Ranking = ({ ranking }: RankingProps) => {
   const negative = ranking.validations.filter(
     (item) => item.type === "negative"
   );
-  const percentage = Math.abs(ranking.score / 2) + "%";
-  const direction = ranking.score < 0 ? "negative" : "positive";
+  const percentage = Math.abs(ranking.score * 20) + "%";
+  const boost = ranking.score < 1 ? "negative" : "positive";
+  const sliderColor = boost === "negative" ? "bg-red-600" : "bg-green-600";
   return (
     <>
       <div>
@@ -21,21 +23,15 @@ export const Ranking = ({ ranking }: RankingProps) => {
           <div
             className={classNames(
               "absolute top-0 transition-width duration-250 ease-linear h-20",
-              `slider-${direction}`,
-              {
-                "bg-red-600": direction === "negative",
-                "bg-green-600": direction === "positive",
-              }
+              sliderColor
             )}
             style={{ width: percentage }}
           />
         </div>
-        <p className="explanation text-gray-600 italic text-sm">
-          Positive rankings result in greater reach and engagement.
+        <p className="explanation text-gray-600 italic text-sm mt-2">
+          Positive rankings result in greater reach 
         </p>
-        <p className="my-2">
-          Score: <strong>{ranking.score}</strong>
-        </p>
+        
         <ul className="mt-5 p-0">
           {positive.map((item, index) => (
             <li
@@ -43,7 +39,7 @@ export const Ranking = ({ ranking }: RankingProps) => {
               key={`positive-${index}`}
             >
               <span>👍</span>
-              <span>{item.message}</span>
+              <span>{item.message.replace(/\(\s*[+-]?\d+\s*\)/, '')}</span>
             </li>
           ))}
           {negative.map((item, index) => (
@@ -52,7 +48,7 @@ export const Ranking = ({ ranking }: RankingProps) => {
               key={`negative-${index}`}
             >
               <span>👎</span>
-              <span>{item.message}</span>
+              <span>{item.message.replace(/\(\s*[+-]?\d+\s*\)/, '')}</span>
             </li>
           ))}
         </ul>
@@ -65,14 +61,8 @@ export const Ranking = ({ ranking }: RankingProps) => {
           height: 20px;
           position: absolute;
           top: 0;
-          left: calc(50% - 1px);
+          left: calc(25% - 1px);
           background: #000;
-        }
-        .slider-negative {
-          right: calc(50% - 1px);
-        }
-        .slider-positive {
-          left: calc(50% - 1px);
         }
       `}</style>
     </>
