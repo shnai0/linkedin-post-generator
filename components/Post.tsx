@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 
 interface PostProps {
   post: string;
-  setTweet: Dispatch<SetStateAction<string>>;
+  setPost: Dispatch<SetStateAction<string>>;
   media: boolean;
   setMedia: Dispatch<SetStateAction<boolean>>;
 }
