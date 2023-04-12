@@ -18,7 +18,7 @@ export default function Home() {
   });
   const [post, setPost] = useState<string>("");
   const [media, setMedia] = useState<boolean>(false);
-  const [vibe, setVibe] = useState<VibeType>("Professional");
+  const [vibe, setVibe] = useState<VibeType>("Story");
   // const [hasVideo, setHasVideo] = useState<boolean>(false);
   // const [hasCarousel, setHasCarousel] = useState<boolean>(false);
 
