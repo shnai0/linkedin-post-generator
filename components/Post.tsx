@@ -31,7 +31,7 @@ export const Post = ({ post, setPost, media, setMedia }: PostProps) => {
           Image / GIF / Video
         </label>
       </div>
-      <div className="flex mb-5 items-center space-x-3">
+      <div className="flex mb-1 items-center space-x-3">
       </div>
     </>
   );

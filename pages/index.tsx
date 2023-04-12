@@ -80,6 +80,7 @@ Add space between each abstract.`;
 The Linkedin algorithm contains boosts and demotions based on what you are writing. If person select this ${vibe}, make sure the generated ${post} must follow these conditions and be short, crips and inspiring:
 - Post length must be no more than 200 characters. 
 - Each sentence length is less than 20 characters. 
+0 Structure if the post, one sentence and a list
 - First sentence must start with smth like that: There are 2 types of, 1 big mistake make, Most people think, What worked in the past might not, When you create content, avoid, 5 quick marketing tips, Most companies, If you don't plan to, Behind every bad, Before asking (change numbers, generate always new numbers, generate always new beggining). 
 - If post copied in the field contain some numbers keep them the same.
 - Next sentences should be generated, and conain list, each list point start from number
@@ -89,13 +90,15 @@ Each sentence from new line
 Add space between each abstract.`;
         break;
       case "Unpopular opinion":
-        prompt = `You are a LinkedinGPT, a large language model that generates viral posts for Linkedin. You are given a prompt of a post and must generate a post that is more likely to be liked and reposted than the original post.
-The Linkedin algorithm contains boosts and demotions based on what you are writing. If person select this ${vibe}, make sure the generated ${post} must follow these conditions and create an unpopular opinion about the topic:
-- Post length must be less than 200 characters. 
-- Post must contain no more tha 3 sentences 
-- First sentence must start with: Unpopular opinion: 
----
-Add space between each abstract.`;
+        prompt = `Generate a short linkedin post`;
+
+        //         `You are a LinkedinGPT, a large language model that generates viral posts for Linkedin. You are given a prompt of a post and must generate a post that is more likely to be liked and reposted than the original post.
+        // The Linkedin algorithm contains boosts and demotions based on what you are writing. If person select this ${vibe}, make sure the generated ${post} must follow these conditions and create an unpopular opinion about the topic:
+        // - Post length must be less than 200 characters. 
+        // - Post must contain no more tha 3 sentences 
+        // - First sentence must start with: Unpopular opinion: 
+        // ---
+        // Add space between each abstract.`;
         break;
       case "Case Study":
         prompt = `You are a LinkedinGPT, a large language model that generates viral posts for Linkedin. You are given a prompt of a post and must generate a post that is more likely to be liked and reposted than the original post.
@@ -240,14 +243,7 @@ Add space between each abstract.`;
                 </h1>
                 <p className="mt-3 mb-10 text-center">
                   See how your post performs and enchance it with ChatGPT. Time to go viral <br />
-                  <a
-                    target="_blank"
-                    href="https://github.com/twitter/the-algorithm"
-                    rel="noreferrer"
-                    className="text-blue-500 hover:text-blue-600"
-                  >
-                    nothing here
-                  </a>
+
                 </p>
                 <div className="flex flex-row w-full space-x-20">
                   <div className="flex w-1/2 flex-col">
@@ -268,14 +264,12 @@ Add space between each abstract.`;
                     </div>
 
                     <div className="flex mb-5 items-center space-x-3">
-                      <Image src="/2-black.png" width={30} height={30} alt="1 icon" />
-                      <p className="text-left font-medium">Select your vibe.</p>
+
+
                     </div>
                     <div className="block">
                       <DropDown vibe={vibe} setVibe={setVibe} />
                     </div>
-
-
                     <div className="my-4">
                       <button
                         disabled={loading}
@@ -316,7 +310,7 @@ Add space between each abstract.`;
                             }}
                             key={optimizedPost}
                           >
-                            <p className="text-blue-500" dangerouslySetInnerHTML={{ __html: optimizedPost }} />
+                            <p className="text-black-300" dangerouslySetInnerHTML={{ __html: optimizedPost }} />
                           </div>
                         </div>
                       </div>
