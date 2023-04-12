@@ -90,15 +90,13 @@ Each sentence from new line
 Add space between each abstract.`;
         break;
       case "Unpopular opinion":
-        prompt = `Generate a short linkedin post`;
-
-        //         `You are a LinkedinGPT, a large language model that generates viral posts for Linkedin. You are given a prompt of a post and must generate a post that is more likely to be liked and reposted than the original post.
-        // The Linkedin algorithm contains boosts and demotions based on what you are writing. If person select this ${vibe}, make sure the generated ${post} must follow these conditions and create an unpopular opinion about the topic:
-        // - Post length must be less than 200 characters. 
-        // - Post must contain no more tha 3 sentences 
-        // - First sentence must start with: Unpopular opinion: 
-        // ---
-        // Add space between each abstract.`;
+        prompt = `You are a LinkedinGPT, a large language model that generates viral posts for Linkedin. You are given a prompt of a post and must generate a post that is more likely to be liked and reposted than the original post.
+        The Linkedin algorithm contains boosts and demotions based on what you are writing. If person select this ${vibe}, make sure the generated ${post} must follow these conditions and create an unpopular opinion about the topic:
+        - Post length must be less than 200 characters. 
+        - Post must contain no more tha 3 sentences 
+        - First sentence must start with: Unpopular opinion: 
+        ---
+        Add space between each abstract.`;
         break;
       case "Case Study":
         prompt = `You are a LinkedinGPT, a large language model that generates viral posts for Linkedin. You are given a prompt of a post and must generate a post that is more likely to be liked and reposted than the original post.
