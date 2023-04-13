@@ -8,7 +8,7 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-const WEBSITE_URL = process.env.NEXT_PUBLIC_ANALYTICS_URL;
+const WEBSITE_URL: string = process.env.NEXT_PUBLIC_ANALYTICS_URL || "";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
