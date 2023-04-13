@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+
 export default function Footer() {
   return (
     <footer className="text-center h-16 sm:h-20 w-full sm:pt-2 pt-4 border-t mt-5 flex sm:flex-row flex-col justify-between items-center px-3 space-y-3 sm:mb-0 mb-3">
@@ -25,7 +26,7 @@ export default function Footer() {
       </div>
       <div className="flex space-x-4 pb-4 sm:pb-0">
         <Link
-          href="https://twitter.com/mfts0"
+          href="https://twitter.com/shnai0"
           className="group"
           aria-label="@mfts0 on Twitter"
         >
@@ -37,9 +38,9 @@ export default function Footer() {
           </svg>
         </Link>
         <Link
-          href="https://github.com/mfts0/twitter-algorithm-ai"
+          href="https://github.com/shnai0/linkedin-booster"
           className="group"
-          aria-label="@mfts0 on GitHub"
+          aria-label="@shnai0 on GitHub"
         >
           <svg
             aria-hidden="true"
@@ -48,6 +49,20 @@ export default function Footer() {
             <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z" />
           </svg>
         </Link>
+        <Link
+          href="https://www.linkedin.com/in/iuliia-shnai/"
+          className="group"
+          aria-label="@your-linkedin-username on LinkedIn"
+        >
+          <svg aria-hidden="true"
+            className="h-6 w-6 fill-slate-500 group-hover:fill-slate-700" >
+            <path d="M42,37c0,2.762-2.238,5-5,5H11c-2.761,0-5-2.238-5-5V11c0-2.762,2.239-5,5-5h26c2.762,0,5,2.238,5,5V37z" />
+            <path
+              fill="#FFF"
+              d="M12 19H17V36H12zM14.485 17h-.028C12.965  17 12 15.888 12 14.499 12 13.08 12.995 12 14.514 12c1.521 0 2.458 1.08 2.486 2.499C17 15.887 16.035 17 14.485 17zM36 36h-5v-9.099c0-2.198-1.225-3.698-3.192-3.698-1.501 0-2.313 1.012-2.707 1.99C24.957 25.543 25 26.511 25 27v9h-5V19h5v2.616C25.721 20.5 26.85 19 29.738 19c3.578 0 6.261 2.25 6.261 7.274L36 36 36 36z" />
+          </svg>
+        </Link>
+
       </div>
     </footer>
   );

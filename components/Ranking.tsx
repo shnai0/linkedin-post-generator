@@ -28,14 +28,14 @@ export const Ranking = ({ ranking }: RankingProps) => {
             style={{ width: percentage }}
           />
         </div>
-        <p className="explanation text-gray-600 italic text-sm mt-2">
+        {/* <p className="explanation text-gray-600 italic text-sm mt-2">
           Positive rankings result in greater reach 
-        </p>
-        
+        </p> */}
+
         <ul className="mt-5 p-0">
           {positive.map((item, index) => (
             <li
-              className="positive text-green-600 flex items-center space-x-2 list-style-none my-1"
+              className="positive text-green-600 flex items-center space-x-2 list-style-none my-5 text-sm"
               key={`positive-${index}`}
             >
               <span>👍</span>
@@ -44,7 +44,7 @@ export const Ranking = ({ ranking }: RankingProps) => {
           ))}
           {negative.map((item, index) => (
             <li
-              className="negative text-red-600 flex items-center space-x-2 list-style-none my-1"
+              className="negative text-red-600 flex items-center space-x-2 list-style-none my-1 text-sm"
               key={`negative-${index}`}
             >
               <span>👎</span>

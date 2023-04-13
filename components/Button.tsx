@@ -12,7 +12,7 @@ export const Button = ({
     <>
       <button
         onClick={onClick}
-        className="font-medium bg-blue-500 rounded-md text-white px-4 py-2 hover:bg-blue-600"
+        className="font-medium bg-blue-900 rounded-md text-white px-4 py-2 hover:bg-blue-900"
       >
         {children}
       </button>

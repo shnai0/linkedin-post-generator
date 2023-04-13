@@ -7,6 +7,7 @@ import { rank } from "@/lib/linkedin-algorithm";
 import { Toaster, toast } from "react-hot-toast";
 import LoadingDots from "@/components/LoadingDots";
 import DropDown, { VibeType } from "@/components/DropDown";
+import Footer from "@/components/Footer";
 
 
 export default function Home() {
@@ -162,16 +163,16 @@ Add space between each abstract.`;
   return (
     <>
       <Head>
-        <title>Real LinkedAlgorithm Rank Validator</title>
+        <title>LinkedIn Post Generator</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="👩‍💼" />
         <meta
           name="description"
           content="See how your post performs against Linkedin alghoritm and generate better post with AI."
         />
         <meta
           property="og:site_name"
-          content="real-twitter-algorithm.vercel.app"
+          content="linkedin-booster.vercel.app"
         />
         <meta
           property="og:description"
@@ -179,43 +180,42 @@ Add space between each abstract.`;
         />
         <meta
           property="og:title"
-          content="Real Linkedin Post Booster with ChatGPT"
+          content="Linkedin Post Booster with ChatGPT"
         />
-        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="linkedin:card" content="summary_large_image" />
         <meta
-          name="twitter:title"
+          name="linkedin:title"
           content="Real Linkedin Algorithm Rank Validator"
         />
         <meta
-          name="twitter:description"
+          name="linkedin:description"
           content="See how your post performs against the official open-source Twitter algorithm."
         />
-        <meta
+        {/* <meta
           property="og:image"
           content="https://real-twitter-algorithm.vercel.app/og-image.png"
         />
         <meta
           name="twitter:image"
           content="https://real-twitter-algorithm.vercel.app/og-image.png"
-        />
+        /> */}
       </Head>
 
       <main>
-        <nav className="bg-blue-500 text-white">
+        <nav className="bg-blue-900 text-white ">
           <div className="px-5">
             <div className="max-w-5xl mx-auto">
-              <div className="flex justify-between items-center h-16">
-                <div className="wordmark flex items-center text-base">
-                  <Image
-                    src="/logo.png"
-                    width={24}
-                    height={24}
-                    alt="logo"
-                    className="mr-1"
-                  />
-                  Developer
+              <div className="flex justify-between items-center h-16 ">
+                <div className="flex items-center text-base ">
+                  <a target="_blank"
+                    href="https://www.linkedin.com/in/iuliia-shnai/"
+                    rel="noreferrer"
+                    className="text-white flex max-w-fit items-center justify-center space-x-2 text-xl"
+                  >
+                    <p>👩‍💼</p>
+                  </a>
                 </div>
-                <div>
+                {/* <div>
                   <ul className="flex">
                     <li className="ml-8">
                       <a
@@ -224,10 +224,12 @@ Add space between each abstract.`;
                         rel="noreferrer"
                         className="text-white flex max-w-fit items-center justify-center space-x-2"
                       >
+                        <Github />
+                        <p>Star on GitHub</p>
                       </a>
                     </li>
                   </ul>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -237,14 +239,14 @@ Add space between each abstract.`;
             <div className="max-w-5xl mx-auto">
               <div className="w-full mx-auto">
                 <h1 className="text-6xl text-center font-bold pb-1 text-slate-900">
-                  Linkedin Post Booster
+                  Linkedin Post Booster 🚀
                 </h1>
                 <p className="mt-3 mb-10 text-center">
-                  See how your post performs and enchance it with ChatGPT. Time to go viral <br />
+                  See how your post performs and generate a better one with AI. Time to go viral. <br />
 
                 </p>
-                <div className="flex flex-row w-full space-x-20">
-                  <div className="flex w-1/2 flex-col">
+                <div className="flex flex-col md:flex-row w-full md:space-x-20">
+                  <div className="flex md:w-1/2 flex-col">
                     <h2 className="text-xl font-bold">
                       Your Ranking
                     </h2>
@@ -272,15 +274,15 @@ Add space between each abstract.`;
                       <button
                         disabled={loading}
                         onClick={(e) => optimizePost(e)}
-                        className="bg-blue-500 font-medium rounded-md w-full text-white px-4 py-2 hover:bg-blue-600 disabled:bg-blue-400"
+                        className="bg-blue-800 font-medium rounded-md w-full text-white px-4 py-2 hover:bg-blue-600 disabled:bg-blue-800"
                       >
                         {loading && <LoadingDots color="white" style="large" />}
-                        {!loading && `Generate your post`}
+                        {!loading && `Generate new post `}
                       </button>
                     </div>
 
                   </div>
-                  <div className="flex w-1/2 flex-col">
+                  <div className="flex md:w-1/2 md:flex-col">
                     <Toaster
                       position="top-right"
                       reverseOrder={false}
@@ -308,7 +310,7 @@ Add space between each abstract.`;
                             }}
                             key={optimizedPost}
                           >
-                            <p className="text-black-300" dangerouslySetInnerHTML={{ __html: optimizedPost }} />
+                            <p className="text-black-700" dangerouslySetInnerHTML={{ __html: optimizedPost }} />
                           </div>
                         </div>
                       </div>
@@ -320,6 +322,9 @@ Add space between each abstract.`;
             </div>
           </div>
         </section>
+        <div className="max-w-5xl mx-auto">
+          <Footer />
+        </div>
       </main>
     </>
   );
