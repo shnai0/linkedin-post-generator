@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import { Analytics } from "@vercel/analytics/react";
+import PlausibleProvider from "next-plausible";
 import { Inter } from "next/font/google";
 
 const inter = Inter({
@@ -8,13 +8,16 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+const WEBSITE_URL = process.env.NEXT_PUBLIC_ANALYTICS_URL;
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <main className={inter.className}>
-        <Component {...pageProps} />
-      </main>
-      <Analytics />
+      <PlausibleProvider trackOutboundLinks={true} domain={WEBSITE_URL}>
+        <main className={inter.className}>
+          <Component {...pageProps} />
+        </main>
+      </PlausibleProvider>
     </>
   );
 }
