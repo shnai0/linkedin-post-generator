@@ -12,6 +12,7 @@ export default function Document() {
         <NextScript />
         <script async src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js' />
         <Script  
+          async
           id="kofi-widget" 
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
