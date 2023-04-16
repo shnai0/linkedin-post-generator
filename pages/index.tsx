@@ -50,7 +50,7 @@ The Linkedin algorithm contains boosts and demotions based on what you are writi
 Add idea about which image or visual can be added at the end of the post (this text is not counted as part of post)
 ${post}
 ---
-Generated post length must be more than 800-1400 characters
+Generated post length must be more than 800-1200 characters
 ---
 Between each line must be a space
 ---
@@ -79,19 +79,43 @@ Show only generated post`;
 
         break;
       case "List":
-        prompt = `Generate post using this prompt, based on ${post}. You are a LinkedinGPT, a large language model that generates viral posts for Linkedin. You are given a prompt of a post and must generate a post that is more likely to be liked and reposted than the original post.
-The Linkedin algorithm contains boosts and demotions based on what you are writing. If person select this ${vibe}, make sure the generated post must follow these conditions and be super short sentences from 1-2 words :
-- Post length must be no more than one hundred characters. 
-- Each sentence length is less than twenty characters. 
-- Add only one list 
-- Only First sentences must start with smth like that: There are 2 types of, 1 big mistake make, Most people think, What worked in the past might not, When you, avoid, 5 quick tips, Most companies, If you don't plan to, Behind every bad, Before asking (change numbers, generate always new numbers, generate always new beggining). 
-- If post copied in the field contain some numbers keep them the same.
-- Next sentences should be generated, and conain list, each list point start from number
----
-Each sentence from new line 
----
-Add space between each abstract.
----`;
+        prompt = `Generate a post that is likely to be liked and reposted on LinkedIn, based on ${post}. Your post should follow these conditions:
+
+Post length must be no more than one hundred characters.
+Each sentence length is no more than two words.
+Post is a list of things.
+First sentence must start with one of the following: There are 2 types of, 1 big mistake to avoid, When you..., avoid..., 5 quick tips..., Most companies..., If you don't plan to... (replace the ellipsis with a number).
+If the copied post contains numbers, keep them the same.
+The next sentences should be generated and should not include numbers.`;
+
+        // Generate post using this prompt, based on ${post}. You are a LinkedinGPT, a large language model that generates viral posts for Linkedin. 
+        //         ely to be liked and reposted than the original post.
+        // The Linkedin algorithm contains boosts and demotions based on what you are writing. If person select this ${vibe}, make sure the generated ${post} must follow these conditions of having list and 1-2 sentences:
+        // - Post length must be no more than one hundred characters. 
+        // - Each sentence length is less than twenty characters. 
+        // - Post is a list of things
+        // - First sentences must start with: There are 2 types of, 1 big mistake make, When you, avoid, 5 quick tips, Most companies, If you don't plan to, (change numbers, generate always new numbers, only add in the first line of post). Next sentences should not include numbers and these formulations.  
+        // - If post copied in the field contain some numbers keep them the same.
+        // - Next sentences should be generated, should not include numbers.
+        // ---
+        // Each sentence from new line 
+        // ---
+        // Add space between each abstract.
+        // ---
+        // Show only generated post
+        // You are a LinkedinGPT, a large language model that generates viral posts for Linkedin. You are given a prompt of a post and must generate a post that is more likely to be liked and reposted than the original post.
+        // s If person select this ${vibe}, make sure the generated ${post} must follow these conditions and be super short sentences from 1-2 words :
+        // - Post length must be no more than 100 characters or 100 words. 
+        // - Each sentence length is less than twenty characters. 
+        // - Add only one list, no more
+        // - Only one and fitst sentence of the  ${post}  must start with smth like that: There are 2 types of, 1 big mistake make, Most people think, What worked in the past might not, When you, avoid, 5 quick tips, Most companies, If you don't plan to, Behind every bad, Before asking (change numbers, generate always new numbers.  Next sentences should not include numbers and these formulations. 
+        // - If post copied in the field contain some numbers keep them the same.
+        // - Next sentences should be generated
+        // ---
+        // Each sentence from new line 
+        // ---
+        // Add space between each abstract.
+        // ---`;
 
         break;
       case "Unpopular opinion":
@@ -109,7 +133,7 @@ The Linkedin algorithm contains boosts and demotions based on what you are writi
 - Post must relate to what initially is inserted  
 - Post length must be no more than 1000 characters. 
 - Each sentence length is less than 200 characters. 
-- First sentence must start with smth like that, or similar text to one: Pro-tip, These simeple expereiments, Here is one of my biggest learnings from this year, Inside, Being ... does not mean, Earlier this year , This might be the hottest (use similar words) 
+- First sentence of the must start with smth like that, or similar text to one: Pro-tip, These simeple expereiments, Here is one of my biggest learnings from this year, Inside, Being ... does not mean, Earlier this year , This might be the hottest (use similar words) 
 - If post copied in the field contain some numbers keep them the same.
 - Next sentences should be generated, and contain list, rigorous list, each list point start from emoji
 ---
