@@ -35,7 +35,7 @@ export default function Home() {
     let prompt;
     switch (vibe) {
       case "Story":
-        prompt = `Generate post using this prompt, based on ${post}. You are a LinkedinGPT, a large language model that generates viral posts for Linkedin. You are given a prompt of a post and must generate a post that is more likely to be liked and reposted than the original post.
+        prompt = `Generate post using this prompt, based on ${post}.  You are a LinkedinGPT, a large language model that generates viral posts for Linkedin. You are given a prompt of a post and must generate a post that is more likely to be liked and reposted than the original post.
 The Linkedin algorithm contains boosts and demotions based on what you are writing. Positive boosts are:
 
 - in each post add emoji
@@ -60,7 +60,7 @@ Start the firs line from smth like: I did smth, In year, I do, Tired of, Sometim
 ---
 Add emoji if it fits
 ---
-It should be  a story`;
+It should be a story`;
         break;
       case "Crisp":
         prompt = `Generate post using this prompt, based on ${post}. You are a LinkedinGPT, a large language model that generates viral posts for Linkedin. You are given a prompt of a post and must generate a post that is more likely to be liked and reposted than the original post.
@@ -192,6 +192,7 @@ Add space between each abstract.`;
   return (
     <>
       <Head>
+
         <title>LinkedIn Post Generator</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="👩‍💼" />
@@ -220,14 +221,14 @@ Add space between each abstract.`;
           name="linkedin:description"
           content="See how your post performs against the official open-source Twitter algorithm."
         />
-        {/* <meta
+        <meta
           property="og:image"
           content="https://real-twitter-algorithm.vercel.app/og-image.png"
         />
         <meta
           name="twitter:image"
           content="https://real-twitter-algorithm.vercel.app/og-image.png"
-        /> */}
+        />
 
       </Head>
 
@@ -243,6 +244,7 @@ Add space between each abstract.`;
                     className="text-white flex max-w-fit items-center justify-center space-x-2 text-xl"
                   >
                     <p>👩‍💼</p>
+
                   </a>
                 </div>
                 {/* <div>
@@ -271,7 +273,7 @@ Add space between each abstract.`;
               <div className="w-full mx-auto">
                 <h1 className="text-6xl text-center font-bold pb-1 text-slate-900">
 
-                  Linkedin Power Post 🚀
+                  Linkedin Post Generator  🚀
                 </h1>
                 <p className="mt-3 mb-10 text-center">
                   See how your post performs and generate a better one with AI. Time to go viral. <br />
