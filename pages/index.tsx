@@ -23,8 +23,6 @@ export default function Home() {
   // const [hasVideo, setHasVideo] = useState<boolean>(false);
   // const [hasCarousel, setHasCarousel] = useState<boolean>(false);
 
-
-
   useEffect(() => {
     const rankResponse = rank(post, media);
     setRanking(rankResponse);
@@ -37,7 +35,7 @@ export default function Home() {
     let prompt;
     switch (vibe) {
       case "Story":
-        prompt = `You are a LinkedinGPT, a large language model that generates viral posts for Linkedin. You are given a prompt of a post and must generate a post that is more likely to be liked and reposted than the original post.
+        prompt = `Generate post using this prompt, based on ${post}. You are a LinkedinGPT, a large language model that generates viral posts for Linkedin. You are given a prompt of a post and must generate a post that is more likely to be liked and reposted than the original post.
 The Linkedin algorithm contains boosts and demotions based on what you are writing. Positive boosts are:
 
 - in each post add emoji
@@ -58,41 +56,47 @@ Between each line must be a space
 ---
 Keep all mentions of people in there
 ---
-Start the firs line from smth like: I did smth, In year, I do, Tired of, Sometimes it is just, A path toward, Because this is not,
+Start the firs line from smth like: I did smth, In year, I do, Tired of, Sometimes it is just, A path toward, Because this is not,I've been struggling,  (change the begginign depends on the context )
+---
+Add emoji if it fits
 ---
 It should be  a story`;
         break;
       case "Crisp":
-        prompt = `You are a LinkedinGPT, a large language model that generates viral posts for Linkedin. You are given a prompt of a post and must generate a post that is more likely to be liked and reposted than the original post.
+        prompt = `Generate post using this prompt, based on ${post}. You are a LinkedinGPT, a large language model that generates viral posts for Linkedin. You are given a prompt of a post and must generate a post that is more likely to be liked and reposted than the original post.
 The Linkedin algorithm contains boosts and demotions based on what you are writing. If person select this ${vibe}, make sure the generated ${post} must follow these conditions and be short, crips and inspiring:
 - Post length must be no more than 500 characters. 
 - Each sentence length is less than 50 characters. 
-- First sentences must start with smth like that : I've spent 5 months, 10 step plan, I made £10,338 In, Last January, this January, I was on .. , I created 1000 of, how to get 1000 followers, how to do 1000 of, 10 lessons took me 10 months,  15 reasons, 5 days ago, 3 shocking steps, my strategy for  2023. (change numbers, generate always new numbers, generate always new beggining). Next sentences should not include numbers and these formulations.  
+- First sentences must start with smth like that : I've spent 5 months, 10 step plan, I made 10000 In, Last January, this January, I was on .. , I created 1000 of, how to get 1000 followers, how to do 1000 of, 10 lessons took me,  15 reasons, 5 days ago, 3 shocking steps, my strategy for  2023, over the past 10 years. (change numbers, generate always new numbers, generate always new beggining). Next sentences should not include numbers and these formulations.  
 - If post copied in the field contain some numbers keep them the same.
 - Next sentences should be generated, should not include numbers.
 ---
 Each sentence from new line 
 ---
-Add space between each abstract.`;
+Add space between each abstract.
+---
+Show only generated post`;
 
         break;
       case "List":
-        prompt = `You are a LinkedinGPT, a large language model that generates viral posts for Linkedin. You are given a prompt of a post and must generate a post that is more likely to be liked and reposted than the original post.
-The Linkedin algorithm contains boosts and demotions based on what you are writing. If person select this ${vibe}, make sure the generated ${post} must follow these conditions and be short, crips and inspiring:
-- Post length must be no more than 200 characters. 
-- Each sentence length is less than 20 characters. 
-0 Structure if the post, one sentence and a list
-- First sentence must start with smth like that: There are 2 types of, 1 big mistake make, Most people think, What worked in the past might not, When you create content, avoid, 5 quick marketing tips, Most companies, If you don't plan to, Behind every bad, Before asking (change numbers, generate always new numbers, generate always new beggining). 
+        prompt = `Generate post using this prompt, based on ${post}. You are a LinkedinGPT, a large language model that generates viral posts for Linkedin. You are given a prompt of a post and must generate a post that is more likely to be liked and reposted than the original post.
+The Linkedin algorithm contains boosts and demotions based on what you are writing. If person select this ${vibe}, make sure the generated post must follow these conditions and be super short sentences from 1-2 words :
+- Post length must be no more than one hundred characters. 
+- Each sentence length is less than twenty characters. 
+- Add only one list 
+- Only First sentences must start with smth like that: There are 2 types of, 1 big mistake make, Most people think, What worked in the past might not, When you, avoid, 5 quick tips, Most companies, If you don't plan to, Behind every bad, Before asking (change numbers, generate always new numbers, generate always new beggining). 
 - If post copied in the field contain some numbers keep them the same.
 - Next sentences should be generated, and conain list, each list point start from number
 ---
 Each sentence from new line 
 ---
-Add space between each abstract.`;
+Add space between each abstract.
+---`;
+
         break;
       case "Unpopular opinion":
-        prompt = `You are a LinkedinGPT, a large language model that generates viral posts for Linkedin. You are given a prompt of a post and must generate a post that is more likely to be liked and reposted than the original post.
-        The Linkedin algorithm contains boosts and demotions based on what you are writing. If person select this ${vibe}, make sure the generated ${post} must follow these conditions and create an unpopular opinion about the topic:
+        prompt = `Generate post using this prompt, based on ${post}. You are a LinkedinGPT, a large language model that generates viral posts for Linkedin. You are given a prompt of a post and must generate a post that is more likely to be liked and reposted than the original post.
+        The Linkedin algorithm contains boosts and demotions based on what you are writing. If person select this ${vibe}, make sure the generated post must follow these conditions and create an unpopular opinion about the topic:
         - Post length must be less than 200 characters. 
         - Post must contain no more tha 3 sentences 
         - First sentence must start with: Unpopular opinion: 
@@ -100,11 +104,12 @@ Add space between each abstract.`;
         Add space between each abstract.`;
         break;
       case "Case Study":
-        prompt = `You are a LinkedinGPT, a large language model that generates viral posts for Linkedin. You are given a prompt of a post and must generate a post that is more likely to be liked and reposted than the original post.
-The Linkedin algorithm contains boosts and demotions based on what you are writing. If person select this ${vibe}, make sure the generated ${post} must follow these conditions and be fullfilling and rigorous:
+        prompt = `Generate post using this prompt, based on ${post}. person insert You are a LinkedinGPT, a large language model that generates viral posts for Linkedin. You are given a prompt of a post and must generate a post that is more likely to be liked and reposted than the original post.
+The Linkedin algorithm contains boosts and demotions based on what you are writing. If person select this ${vibe}, make sure the generated post must follow these conditions and be fullfilling and rigorous and realate to post typed:
+- Post must relate to what initially is inserted  
 - Post length must be no more than 1000 characters. 
 - Each sentence length is less than 200 characters. 
-- First sentence must start with smth like that, randomise the begginign of sentence, always start with different one, or similar text to one: Pro-tip, These four simple (and quick) experiments could, Here is one of my biggest learnings from this year, DigitalOcean beat Q3 revenue expectations, Inside Hotjar product led, Being product-led does not mean, Earlier this year Pendo.io acquired Mind the Product, This might be the hottest PLG company (change the names of companies depends onindustry and randomise the sentence begginning, generate always new beggining) 
+- First sentence must start with smth like that, or similar text to one: Pro-tip, These simeple expereiments, Here is one of my biggest learnings from this year, Inside, Being ... does not mean, Earlier this year , This might be the hottest (use similar words) 
 - If post copied in the field contain some numbers keep them the same.
 - Next sentences should be generated, and contain list, rigorous list, each list point start from emoji
 ---
@@ -199,6 +204,7 @@ Add space between each abstract.`;
           name="twitter:image"
           content="https://real-twitter-algorithm.vercel.app/og-image.png"
         /> */}
+
       </Head>
 
       <main>
@@ -234,12 +240,14 @@ Add space between each abstract.`;
             </div>
           </div>
         </nav>
-        <section className="py-10 lg:py-20">
+        <section className="py-10 lg:py-20 ">
+          {/* bg-[url('/image1.svg')] */}
           <div className="px-4">
             <div className="max-w-5xl mx-auto">
               <div className="w-full mx-auto">
                 <h1 className="text-6xl text-center font-bold pb-1 text-slate-900">
-                  Linkedin Post Booster 🚀
+
+                  Linkedin Power Post 🚀
                 </h1>
                 <p className="mt-3 mb-10 text-center">
                   See how your post performs and generate a better one with AI. Time to go viral. <br />

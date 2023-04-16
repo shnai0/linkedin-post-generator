@@ -52,7 +52,7 @@ export function rank(post: string, postMedia: boolean): RankResponse {
     postMedia: postMedia,
   };
   const rules = [
-  
+
     emojis(postData),
     sentiment(postData),
     lineBreaks(postData),
@@ -76,10 +76,10 @@ export function rank(post: string, postMedia: boolean): RankResponse {
     })
   );
   const sum = scores.reduce((partialSum, a) => partialSum * a, 1);
-    return {
-      score: sum,
-      validations,
-    };
+  return {
+    score: sum,
+    validations,
+  };
 }
 
 // ---------------------------
@@ -233,24 +233,24 @@ function sentiment({ post, sentiment }: PostData): Rank {
     if (sentiment.comparative > 1.5) {
       return {
         score: 1.5,
-        message: `Exceptionally positive.`,
+        // message: `Exceptionally positive.`,
       };
     } else {
       return {
         score: 1.1,
-        message: `Positive sentiment.`,
+        // message: `Positive sentiment.`,
       };
     }
   } else if (sentiment.comparative <= -0.5) {
     if (sentiment.comparative < -1.5) {
       return {
         score: 0.5,
-        message: `Exceptionally negative.`,
+        // message: `Exceptionally negative.`,
       };
     } else {
       return {
         score: 0.9,
-        message: `Negative sentiment.`,
+        // message: `Negative sentiment.`,
       };
     }
   } else {
@@ -267,7 +267,7 @@ function lineBreaks({ post, sentiment }: PostData): Rank {
   const breaks = post.split(/\n\s*\n/);
   const totalBreaks = breaks.length - 1;
   if (totalBreaks >= 1) {
-   
+
     return {
       score: 1.5,
       // message: `Used ${totalBreaks} line breaks.`,
@@ -301,23 +301,23 @@ function lineLength({ post }: PostData): Rank {
     type: "positive"
   };
 }
-    /**
- * Function to ask questions
- */
-  function questions({ post, sentiment }: PostData): Rank {
-    if (post.includes("?")) {
-        return {
-          score: 1.5,
-          // message: "Great! Questions can help to activate discussion"
-        };
-    } else {
-      return {
-        score: 1,
-        message: "Add questions to activate discussion",
-        type: "negative"
-      };
-    }
+/**
+* Function to ask questions
+*/
+function questions({ post, sentiment }: PostData): Rank {
+  if (post.includes("?")) {
+    return {
+      score: 1.5,
+      // message: "Great! Questions can help to activate discussion"
+    };
+  } else {
+    return {
+      score: 1,
+      message: "Add questions to activate discussion",
+      type: "negative"
+    };
   }
+}
 
 
 
