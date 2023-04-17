@@ -206,11 +206,11 @@ Add space between each abstract.`;
         />
         <meta
           property="og:description"
-          content="See how your post performs against Linkedin alghoritm and generate better post with AI."
+          content="See how your post performs against LinkedIn alghoritm and generate better post with AI."
         />
         <meta
           property="og:title"
-          content="Linkedin Post Booster with ChatGPT"
+          content="LinkedIn Post Generator with AI"
         />
         <meta name="linkedin:card" content="summary_large_image" />
         <meta
