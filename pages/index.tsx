@@ -215,19 +215,19 @@ Add space between each abstract.`;
         <meta name="linkedin:card" content="summary_large_image" />
         <meta
           name="linkedin:title"
-          content="Real Linkedin Algorithm Rank Validator"
+          content="Linkedin Post Generator"
         />
         <meta
           name="linkedin:description"
-          content="See how your post performs against the official open-source Twitter algorithm."
+          content="See how your post performs against Linkedin alghoritm and generate better post with AI."
         />
         <meta
           property="og:image"
-          content="https://real-twitter-algorithm.vercel.app/og-image.png"
+          content="https://postgenerator.app/cover.png"
         />
         <meta
-          name="twitter:image"
-          content="https://real-twitter-algorithm.vercel.app/og-image.png"
+          name="linked:image"
+          content="https://postgenerator.app/cover.png"
         />
 
       </Head>
