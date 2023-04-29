@@ -273,7 +273,7 @@ Add space between each abstract.`;
               <div className="w-full mx-auto">
                 <h1 className="text-6xl text-center font-bold pb-1 text-slate-900">
 
-                  Linkedin Post Generator  🚀
+                  LinkedIn Post Generator  🚀
                 </h1>
                 <p className="mt-3 mb-10 text-center">
                   See how your post performs and generate a better one with AI. Time to go viral. <br />
