@@ -31,13 +31,10 @@ export const Post = ({ post, setPost, media, setMedia }: PostProps) => {
           Image / Carousel/ Video
         </label>
       </div>
-      <div className="flex mb-1 items-center space-x-3">
-      </div>
+      <div className="flex mb-1 items-center space-x-3"></div>
     </>
   );
 };
-
-
 
 // import { Dispatch, SetStateAction, useState } from "react";
 

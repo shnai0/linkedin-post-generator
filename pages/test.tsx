@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
 import { Post } from "@/components/Post";
+import { Input } from "@/components/Input";
 import { Ranking } from "@/components/Ranking";
 import { rank } from "@/lib/linkedin-algorithm";
 import { Toaster, toast } from "react-hot-toast";
@@ -9,7 +10,6 @@ import LoadingDots from "@/components/LoadingDots";
 import DropDown, { VibeType } from "@/components/DropDown";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-import Popup from "@/components/Popup";
 import {
   FaTwitter,
   FaLinkedin,
@@ -27,16 +27,9 @@ export default function Home() {
     validations: [],
   });
   const [post, setPost] = useState<string>("");
+  const [input, setInput] = useState<string>("");
   const [media, setMedia] = useState<boolean>(false);
   const [vibe, setVibe] = useState<VibeType>("Story");
-  const [showPopup, setShowPopup] = useState(false);
-
-  const handleButtonClick = () => {
-    setTimeout(() => {
-      setShowPopup(true);
-    }, 3000);
-  };
-
   // const [hasVideo, setHasVideo] = useState<boolean>(false);
   // const [hasCarousel, setHasCarousel] = useState<boolean>(false);
 
@@ -80,19 +73,14 @@ Add emoji if it fits
 It should be a story`;
         break;
       case "Crisp":
-        prompt = `Generate post using this prompt, based on ${post}. You are a LinkedinGPT, a large language model that generates viral posts for Linkedin. You are given a prompt of a post and must generate a post that is more likely to be liked and reposted than the original post.
-The Linkedin algorithm contains boosts and demotions based on what you are writing. If person select this ${vibe}, make sure the generated ${post} must follow these conditions and be short, crips and inspiring:
-- Post length must be no more than 500 characters. 
-- Each sentence length is less than 50 characters. 
-- First sentences must start with smth like that : I've spent 5 months, 10 step plan, I made 10000 In, Last January, this January, I was on .. , I created 1000 of, how to get 1000 followers, how to do 1000 of, 10 lessons took me,  15 reasons, 5 days ago, 3 shocking steps, my strategy for  2023, over the past 10 years. (change numbers, generate always new numbers, generate always new beggining). Next sentences should not include numbers and these formulations.  
-- If post copied in the field contain some numbers keep them the same.
-- Next sentences should be generated, should not include numbers.
----
-Each sentence from new line 
----
-Add space between each abstract.
----
-Show only generated post`;
+        prompt = `You are a LinkedinGPT, a large language model that generates viral posts for Linkedin. 
+
+Your task is to generate a new post for a topic provided in ${post}. This post should follow the style and format observed in the example posts contained in ${input}. However, the content or specific topics of these example posts should not be reflected in your generated posts.
+
+When analyzing the ${input}, pay close attention to the person's writing style and the structure of their posts. Identify and imitate the patterns of spacing between lines, use of emojis, incorporation of questions, and other stylistic choices. Also, consider the average length of their posts.
+
+When creating a new post, ensure it is centered around the topic provided in the ${post}, maintaining the observed style and format from the ${input}. Create a post that would resonate with the same audience and yet offer fresh, engaging content on the new topic.
+ `;
 
         break;
       case "List":
@@ -171,10 +159,6 @@ Add space between each abstract.`;
     setOptimizedPost("");
     setLoading(true);
     const prompt = handlePrompt();
-
-    // Show the popup right before the API call
-    handleButtonClick();
-
     const response = await fetch("/api/optimize", {
       method: "POST",
       headers: {
@@ -208,7 +192,6 @@ Add space between each abstract.`;
     }
     setLoading(false);
   };
-
   return (
     <>
       <Head>
@@ -242,7 +225,7 @@ Add space between each abstract.`;
       </Head>
 
       <main>
-        <nav className="bg-blue-900 text-white ">
+        <nav className="bg-black text-white ">
           <div className="px-5">
             <div className="max-w-5xl mx-auto">
               <div className="flex justify-between items-center h-16 ">
@@ -275,33 +258,21 @@ Add space between each abstract.`;
             </div>
           </div>
         </nav>
-
         <section className="py-10 lg:py-20 ">
           {/* bg-[url('/image1.svg')] */}
-          <div className="px-4 ">
-            <div className="max-w-5xl mx-auto text-center justify-center ">
-              <div className="w-full mx-auto mb-6 ">
-                <a
-                  // href="https://vercel.fyi/roomGPT"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="border border-gray-700 rounded-lg py-2 px-4 text-gray-400 text-sm mb-8 transition duration-300 ease-in-out"
-                >
-                  40.000 amazing posts generated 💫
-                  {/* {" "}
-                  <span className="text-blue-600">Vercel</span> */}
-                </a>
-              </div>
 
-              <h1 className="text-6xl text-center font-bold pb-1 text-slate-900  ">
-                Linkedin Post Generator 🚀
-              </h1>
-              <p className="mt-3 mb-10 text-center">
-                See how your post performs and generate a better one with AI.
-                Time to go viral. <br />
-              </p>
+          <div className="px-4">
+            <div className="max-w-5xl mx-auto">
+              <div className="w-full mx-auto">
+                <h1 className="text-6xl text-center font-bold pb-1 text-slate-900">
+                  Ultimate Post Generator 🚀
+                </h1>
+                <p className="mt-3 mb-10 text-center">
+                  See how your post performs and generate a better one with AI.
+                  Time to go viral. <br />
+                </p>
 
-              {/* <div className="mt-4 mb-4 flex justify-center space-x-4">
+                <div className="mt-4 mb-4 flex justify-center space-x-4">
                   <Link href="/index/twitter">
                     <button className="bg-blue-400 text-white flex items-center space-x-2 p-2 rounded">
                       <FaTwitter />
@@ -309,7 +280,7 @@ Add space between each abstract.`;
                     </button>
                   </Link>
 
-                  <Link href="/index/linkedin">
+                  <Link href="/linkedin">
                     <button className="bg-blue-700 text-white flex items-center space-x-2 p-2 rounded">
                       <FaLinkedin />
                       <span>LinkedIn</span>
@@ -339,84 +310,79 @@ Add space between each abstract.`;
                       <span>Reddit</span>
                     </button>
                   </Link>
-                </div> */}
-
-              <div className="flex flex-col md:flex-row w-full md:space-x-20">
-                <div className="flex md:w-1/2 flex-col">
-                  <h2 className="text-xl font-bold">Your Ranking</h2>
-                  <div className="pt-1">
-                    <Ranking ranking={ranking} />
-                  </div>
-
-                  <div className="w-full my-1 mx-auto">
-                    <Post
-                      post={post}
-                      setPost={setPost}
-                      media={media}
-                      setMedia={setMedia}
-                    />
-                  </div>
-
-                  <div className="flex mb-5 items-center space-x-3"></div>
-                  <div className="block">
-                    <DropDown vibe={vibe} setVibe={setVibe} />
-                  </div>
-                  <div className="my-4">
-                    <button
-                      disabled={loading}
-                      onClick={(e) => {
-                        optimizePost(e);
-                        handleButtonClick();
-                      }}
-                      className="bg-blue-700 font-medium rounded-md w-full text-white px-4 py-2 hover:bg-blue-600 disabled:bg-blue-800"
-                    >
-                      {loading && <LoadingDots color="white" style="large" />}
-                      {!loading && `Generate new post `}
-                    </button>
-
-                    <Popup show={showPopup} setShowPopup={setShowPopup} />
-                  </div>
                 </div>
-                <div className="flex md:w-1/2 md:flex-col">
-                  <Toaster
-                    position="top-right"
-                    reverseOrder={false}
-                    toastOptions={{ duration: 2000 }}
-                  />
-                  {optimizedPost && (
-                    <div className="my-1">
-                      <div className="flex justify-between items-center pb-2 border-b border-gray-300">
-                        <h2 className="text-xl font-bold">
-                          Your Generated Post
-                        </h2>
-                      </div>
-                      <div className="max-w-2xl my-4 mx-auto">
-                        <div
-                          className="bg-white rounded-xl shadow-md p-4 hover:bg-gray-100 transition cursor-copy border"
-                          onClick={() => {
-                            navigator.clipboard.write([
-                              new ClipboardItem({
-                                "text/html": new Blob([optimizedPost], {
-                                  type: "text/html",
+
+                <div className="flex flex-col md:flex-row w-full md:space-x-20">
+                  <div className="flex md:w-1/2 flex-col">
+                    {/* <h2 className="text-xl font-bold">Your Ranking</h2> */}
+                    {/* <div className="pt-1">
+                      <Ranking ranking={ranking} />
+                    </div> */}
+
+                    <div className="w-full my-1 mx-auto">
+                      <Input input={input} setInput={setInput} />
+                    </div>
+
+                    <div className="w-full my-1 mx-auto">
+                      <Post post={post} setPost={setPost} />
+                    </div>
+
+                    <div className="flex mb-5 items-center space-x-3"></div>
+                    <div className="block">
+                      <DropDown vibe={vibe} setVibe={setVibe} />
+                    </div>
+                    <div className="my-4">
+                      <button
+                        disabled={loading}
+                        onClick={(e) => optimizePost(e)}
+                        className="bg-black font-medium rounded-md w-full text-white px-4 py-2 hover:bg-blue-600 disabled:bg-blue-800"
+                      >
+                        {loading && <LoadingDots color="white" style="large" />}
+                        {!loading && `Generate new post `}
+                      </button>
+                    </div>
+                  </div>
+                  <div className="flex md:w-1/2 md:flex-col">
+                    <Toaster
+                      position="top-right"
+                      reverseOrder={false}
+                      toastOptions={{ duration: 2000 }}
+                    />
+                    {optimizedPost && (
+                      <div className="my-1">
+                        <div className="flex justify-between items-center pb-2 border-b border-gray-300">
+                          <h2 className="text-xl font-bold">
+                            Your Generated Post
+                          </h2>
+                        </div>
+                        <div className="max-w-2xl my-4 mx-auto">
+                          <div
+                            className="bg-white rounded-xl shadow-md p-4 hover:bg-gray-100 transition cursor-copy border"
+                            onClick={() => {
+                              navigator.clipboard.write([
+                                new ClipboardItem({
+                                  "text/html": new Blob([optimizedPost], {
+                                    type: "text/html",
+                                  }),
                                 }),
-                              }),
-                            ]);
-                            toast("Post copied to clipboard", {
-                              icon: "📋",
-                            });
-                          }}
-                          key={optimizedPost}
-                        >
-                          <p
-                            className="text-black-700"
-                            dangerouslySetInnerHTML={{
-                              __html: optimizedPost,
+                              ]);
+                              toast("Post copied to clipboard", {
+                                icon: "📋",
+                              });
                             }}
-                          />
+                            key={optimizedPost}
+                          >
+                            <p
+                              className="text-black-700"
+                              dangerouslySetInnerHTML={{
+                                __html: optimizedPost,
+                              }}
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
