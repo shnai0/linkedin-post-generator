@@ -219,7 +219,7 @@ Add space between each abstract.`;
           name="description"
           content="See how your post performs against Linkedin alghoritm and generate better post with AI."
         />
-        <meta property="og:site_name" content="linkedin-booster.vercel.app" />
+        <meta property="og:site_name" content="#1 Post Generator 🚀" />
         <meta
           property="og:description"
           content="See how your post performs against LinkedIn alghoritm and generate better post with AI."
