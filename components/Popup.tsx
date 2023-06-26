@@ -1,6 +1,11 @@
 import React from "react";
 
-function Popup({ show, setShowPopup }) {
+interface PopupProps {
+  show: boolean;
+  setShowPopup: (show: boolean) => void;
+}
+
+function Popup({ show, setShowPopup }: PopupProps) {
   const handleCloseClick = () => {
     setShowPopup(false);
   };

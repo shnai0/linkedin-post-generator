@@ -33,7 +33,6 @@ import { compact } from "lodash";
 import Sentiment from "sentiment";
 import LanguageDetect from "languagedetect";
 
-
 export function rank(post: string, postMedia: boolean): RankResponse {
   const parsedPost = post.toLowerCase();
   // Default score
@@ -50,9 +49,9 @@ export function rank(post: string, postMedia: boolean): RankResponse {
     originalPost: post,
     sentiment: theSentimentResponse,
     postMedia: postMedia,
+    input: "",
   };
   const rules = [
-
     emojis(postData),
     sentiment(postData),
     lineBreaks(postData),
@@ -66,7 +65,11 @@ export function rank(post: string, postMedia: boolean): RankResponse {
   const validations: Array<Validation> = compact(
     rules.map((item) => {
       if (item.message) {
-        const type = item.type ? item.type : item.score >= 1 ? "positive" : "negative";
+        const type = item.type
+          ? item.type
+          : item.score >= 1
+          ? "positive"
+          : "negative";
         const operator = type === "positive" ? "+" : "-";
         return {
           message: `${item.message} (${operator}${Math.abs(item.score)})`,
@@ -124,7 +127,7 @@ function multipleHashtags({ post }: PostData): Rank {
   };
 }
 
-// function to detect image 
+// function to detect image
 // function to detect image or video
 function imageVideoBoost({ postMedia }: PostData): Rank {
   const has_media = postMedia;
@@ -204,7 +207,7 @@ function postHasUrl({ post }: PostData): Rank {
 // }
 
 /**
- * Function to favor posts that use emojis 
+ * Function to favor posts that use emojis
  */
 function emojis({ post, sentiment }: PostData): Rank {
   const regex = new RegExp("[\uD800-\uDBFF][\uDC00-\uDFFF]", "g");
@@ -219,10 +222,9 @@ function emojis({ post, sentiment }: PostData): Rank {
   return {
     score: 1,
     message: "No emojis found in the post.",
-    type: "negative"
+    type: "negative",
   };
 }
-
 
 /**
  * Promote negative content because it's more likely to go viral.
@@ -267,7 +269,6 @@ function lineBreaks({ post, sentiment }: PostData): Rank {
   const breaks = post.split(/\n\s*\n/);
   const totalBreaks = breaks.length - 1;
   if (totalBreaks >= 1) {
-
     return {
       score: 1.5,
       // message: `Used ${totalBreaks} line breaks.`,
@@ -276,7 +277,7 @@ function lineBreaks({ post, sentiment }: PostData): Rank {
     return {
       score: 1,
       message: `Add line breaks between the lines.`,
-      type: "negative"
+      type: "negative",
     };
   }
 }
@@ -285,7 +286,7 @@ function lineBreaks({ post, sentiment }: PostData): Rank {
  * Reduce line length
  */
 function lineLength({ post }: PostData): Rank {
-  const lines = post.split('\n');
+  const lines = post.split("\n");
   let score = 1.0;
   for (let i = 0; i < lines.length; i++) {
     if (lines[i].length > 200) {
@@ -298,12 +299,12 @@ function lineLength({ post }: PostData): Rank {
   return {
     score: 1,
     // message: `Good, keep line length 200 characters or less.`,
-    type: "positive"
+    type: "positive",
   };
 }
 /**
-* Function to ask questions
-*/
+ * Function to ask questions
+ */
 function questions({ post, sentiment }: PostData): Rank {
   if (post.includes("?")) {
     return {
@@ -314,12 +315,10 @@ function questions({ post, sentiment }: PostData): Rank {
     return {
       score: 1,
       message: "Add questions to activate discussion",
-      type: "negative"
+      type: "negative",
     };
   }
 }
-
-
 
 /**
  * Favor absolutism. Nuance is dead baby.
@@ -389,8 +388,6 @@ function questions({ post, sentiment }: PostData): Rank {
 //   };
 // }
 
-
-
 /**
  * We like the nihilistic energy of all lowercase.
  */
@@ -444,4 +441,3 @@ function questions({ post, sentiment }: PostData): Rank {
 //     score: 1,
 //   };
 // }
-

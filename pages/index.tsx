@@ -279,7 +279,7 @@ Add space between each abstract.`;
         <section className="py-10 lg:py-20 ">
           {/* bg-[url('/image1.svg')] */}
           <div className="px-4 ">
-            <div className="max-w-5xl mx-auto text-center justify-center ">
+            <div className="max-w-5xl mx-auto text-center">
               <div className="w-full mx-auto mb-6 ">
                 <a
                   // href="https://vercel.fyi/roomGPT"
@@ -343,7 +343,7 @@ Add space between each abstract.`;
 
               <div className="flex flex-col md:flex-row w-full md:space-x-20">
                 <div className="flex md:w-1/2 flex-col">
-                  <h2 className="text-xl font-bold">Your Ranking</h2>
+                  <h2 className="text-xl font-bold text-left">Your Ranking</h2>
                   <div className="pt-1">
                     <Ranking ranking={ranking} />
                   </div>
@@ -408,7 +408,7 @@ Add space between each abstract.`;
                           key={optimizedPost}
                         >
                           <p
-                            className="text-black-700"
+                            className="text-black-700 text-left"
                             dangerouslySetInnerHTML={{
                               __html: optimizedPost,
                             }}
