@@ -1,17 +1,12 @@
 import React from "react";
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/client";
 
 interface PopupProps {
   show: boolean;
   setShowPopup: (show: boolean) => void;
 }
 
-function Popup({ setShowPopup }: PopupProps) {
-  const { data: session, status } = useSession();
-  const loading = status === "loading";
-
-  const show = !session && !loading;
-
+function Popup({ show, setShowPopup }: PopupProps) {
   const handleCloseClick = () => {
     setShowPopup(false);
   };
