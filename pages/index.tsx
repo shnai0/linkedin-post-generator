@@ -292,13 +292,12 @@ Add space between each abstract.`;
                   <span className="text-blue-600">Vercel</span> */}
                 </a>
               </div>
-
-
-                  LinkedIn Post Generator  🚀
+                <h1 className="text-6xl text-center font-bold pb-1 text-slate-900">
+                  Linkedin Post Generator 🚀
                 </h1>
                 <p className="mt-3 mb-10 text-center">
                   See how your post performs and generate a better one with AI. Time to go viral. <br />
-
+                </p>
 
               {/* <div className="mt-4 mb-4 flex justify-center space-x-4">
                   <Link href="/index/twitter">
