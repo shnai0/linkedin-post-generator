@@ -12,13 +12,13 @@ export const Post = ({ post, setPost, media, setMedia }: PostProps) => {
     <>
       <div className="w-full">
         <textarea
-          maxLength={2000}
+          maxLength={10000}
           onChange={(e) => setPost(e.target.value)}
           placeholder="Type your post or idea here. Tick the box if you have visual to get the proper rank."
           className="text-black w-full h-56 p-2 text-s bg-white border border-gray-300 rounded-md shadow-inner md:h-240"
         />
       </div>
-      <div className="flex items-center mt-1 text-xs text-gray-700">
+      {/* <div className="flex items-center mt-1 text-xs text-gray-700">
         <input
           type="checkbox"
           id="media"
@@ -30,8 +30,8 @@ export const Post = ({ post, setPost, media, setMedia }: PostProps) => {
         <label htmlFor="media" className="ml-2">
           Image / Carousel/ Video
         </label>
-      </div>
-      <div className="flex mb-1 items-center space-x-3"></div>
+      </div> */}
+      <div className="flex items-center space-x-3"></div>
     </>
   );
 };

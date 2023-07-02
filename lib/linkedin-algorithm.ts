@@ -50,6 +50,8 @@ export function rank(post: string, postMedia: boolean): RankResponse {
     sentiment: theSentimentResponse,
     postMedia: postMedia,
     input: "",
+    note: "",
+    prompt: "",
   };
   const rules = [
     emojis(postData),
@@ -85,15 +87,6 @@ export function rank(post: string, postMedia: boolean): RankResponse {
   };
 }
 
-// ---------------------------
-// Rules
-// Can return any value between -100 and 100
-//
-// Add new rules here!
-// Returning 0 has no impact on score
-// ---------------------------
-
-// function to detect multiple hashtags
 function multipleHashtags({ post }: PostData): Rank {
   const regex = /#[\w-]+/g;
   const hashtags = post.match(regex);
@@ -142,32 +135,6 @@ function imageVideoBoost({ postMedia }: PostData): Rank {
   };
 }
 
-// // function to detect video
-// function postHasVideo({ has_video }: PostData): Rank {
-//   if (has_video) {
-//     return {
-//       score: 5.0,
-//       message: `Contains video.`,
-//     };
-//   }
-//   return {
-//     score: 1.0,
-//   };
-// }
-
-// // function to detect carousel
-// function postHasCarousel({ has_carousel }: PostData): Rank {
-//   if (has_carousel) {
-//     return {
-//       score: 5.0,
-//       message: `Contains carousel.`,
-//     };
-//   }
-//   return {
-//     score: 1.0,
-//   };
-// }
-
 // function to detect urls in post
 function postHasUrl({ post }: PostData): Rank {
   const regex =
@@ -183,28 +150,6 @@ function postHasUrl({ post }: PostData): Rank {
     score: 1.0,
   };
 }
-
-/**
- * Function to always talk about Linkedin in a positive light.
- */
-// function linkedin({ post, sentiment }: PostData): Rank {
-//   if (post.indexOf("linkedin") >= 0) {
-//     if (sentiment.comparative >= 0) {
-//       return {
-//         score: 2,
-//         message: `Said good things about Linkedin.`,
-//       };
-//     } else {
-//       return {
-//         score: 0.5,
-//         message: `Said bad things about Linkedin.`,
-//       };
-//     }
-//   }
-//   return {
-//     score: 1,
-//   };
-// }
 
 /**
  * Function to favor posts that use emojis
@@ -319,125 +264,3 @@ function questions({ post, sentiment }: PostData): Rank {
     };
   }
 }
-
-/**
- * Favor absolutism. Nuance is dead baby.
- */
-// function confidence({ post, sentiment }: PostData): Rank {
-//   const phrases = [
-//     "definitely",
-//     "only ",
-//     "must",
-//     "have to",
-//     "can never",
-//     "will never",
-//     "never",
-//     "always",
-//   ];
-//   const matches = phrases.map((phrase) => {
-//     const regex = new RegExp(`\\b${phrase}\\b`, "gi");
-//     return (post.match(regex) || []).length;
-//   });
-//   const totalMatches = matches.reduce((partialSum, a) => partialSum + a, 0);
-//   if (totalMatches > 0) {
-//     return {
-//       score: 20 * totalMatches,
-//       message: `Spoke without nuance.`,
-//     };
-//   }
-//   return {
-//     score: 1,
-//   };
-// }
-
-/**
- * No self-awareness allowed!
- */
-// function noDoubt({ post, sentiment }: PostData): Rank {
-//   const phrases = ["maybe", "perhaps ", "sometimes", "some"];
-//   const matches = phrases.map((phrase) => {
-//     const regex = new RegExp(`\\b${phrase}\\b`, "gi");
-//     return (post.match(regex) || []).length;
-//   });
-//   const totalMatches = matches.reduce((partialSum, a) => partialSum + a, 0);
-//   if (totalMatches > 0) {
-//     return {
-//       score: -20 * totalMatches,
-//       message: `Exhibited self-awareness.`,
-//     };
-//   }
-//   return {
-//     score: 1,
-//   };
-// }
-
-/**
- * Be bold and loud!
- */
-// function exclamations({ post, sentiment }: PostData): Rank {
-//   const regex = new RegExp(`!`, "gi");
-//   const exclamations = (post.match(regex) || []).length;
-//   if (exclamations > 0) {
-//     return {
-//       score: 5 * exclamations,
-//       message: `Exclamation point bonus.`,
-//     };
-//   }
-//   return {
-//     score: 1,
-//   };
-// }
-
-/**
- * We like the nihilistic energy of all lowercase.
- */
-// function lowercase({ originalPost }: PostData): Rank {
-//   const isAllLowerCase = originalPost.toLocaleLowerCase() === originalPost;
-//   if (isAllLowerCase) {
-//     return {
-//       score: 40,
-//       message: `All lowercase. Nihilistic energy.`,
-//     };
-//   }
-//   return {
-//     score: 1,
-//   };
-// }
-
-/**
- * We love an all caps post.
- */
-// function uppercase({ originalPost }: PostData): Rank {
-//   const isAllCaps = originalPost.toUpperCase() === originalPost;
-//   if (isAllCaps) {
-//     return {
-//       score: 60,
-//       message: `ALL CAPS. BIG ENERGY.`,
-//     };
-//   }
-//   return {
-//     score: 1,
-//   };
-// }
-
-/**
- * A little hazing never hurt anyone.
- */
-// function hazing({ post, sentiment }: PostData): Rank {
-//   const insults = ["get bent", "pound sand", "kick rocks", "get lost"];
-//   const matches = insults.map((insult) => {
-//     const regex = new RegExp(`\\b${insult}\\b`, "gi");
-//     return (post.match(regex) || []).length;
-//   });
-//   const totalMatches = matches.reduce((partialSum, a) => partialSum + a, 0);
-//   const scorePerMatch = 10;
-//   if (totalMatches > 0) {
-//     return {
-//       score: 50,
-//       message: `Hazing.`,
-//     };
-//   }
-//   return {
-//     score: 1,
-//   };
-// }

@@ -27,6 +27,8 @@ interface AnalysisResult {
 }
 interface PostData {
   post: string;
+  note: string;
+  prompt: string;
   input: string;
   originalPost: string;
   sentiment: AnalysisResult;
