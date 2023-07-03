@@ -35,9 +35,11 @@ export default function Home() {
   const [showPopup, setShowPopup] = useState(false);
   const [tab, setTab] = useState("enhancer"); // Default to "vibe" tab
   const { data: session, status } = useSession();
+  const clickCount = useRef(0);
 
   const handleButtonClick = () => {
-    if (status !== "authenticated") {
+    clickCount.current += 1; // Increment clickCount on each click
+    if (status !== "authenticated" && clickCount.current >= 3) {
       setTimeout(() => {
         setShowPopup(true);
       }, 3000);
@@ -65,15 +67,15 @@ export default function Home() {
         prompt = `Transform the following LinkedIn post by adding enoji. Original post: "${post}". Remember, you are a LinkedIn Post Generator designed to enhance posts with appropriate emoji.`;
 
         break;
-      case "➕ Add a list":
-        prompt = `Transform the following LinkedIn post by adding new list of things related to topic of the post. Original post: "${post}". Remember, you are a LinkedIn Post Generator designed to enhance posts with fitting list.`;
+      case "➕ Add a List":
+        prompt = `You are the LinkedIn Post Generator, and your mission is to enrich existing LinkedIn posts by incorporating relevant list that align with the post's topic. Consider the following original post:  "${post}". Your task is to seamlessly weave in an appropriate list to elevate the content. The length of each list line should not be more than 100 characters. Remember, your goal is to make as minimum changes as possible to post.`;
 
         break;
-      case "➕ Add numbers":
-        prompt = `Transform the following LinkedIn post by adding numbers in the text as a statistics or data. Original post: "${post}". Remember, you are a LinkedIn Post Generator designed to enhance posts with fitting numbers.`;
+      case "➕ Add Stats":
+        prompt = `You are the LinkedIn Post Generator, and your mission is to enrich existing LinkedIn posts by incorporating relevant statistics with numbers that align with the post's topic. Consider the following original post:  "${post}". Your task is to seamlessly weave in an appropriate numbers to elevate the content. Remember, your goal is to make as minimum changes as possible to post.`;
         break;
-      case "➕ Add question":
-        prompt = `Transform the following LinkedIn post by adding questions. Original post: "${post}". Remember, you are a LinkedIn Post Generator designed to enhance posts with fitting questions for discussion.`;
+      case "➕ Add a Question":
+        prompt = `As the LinkedIn Post Generator, your task is to stimulate engagement by integrating a thought-provoking question into the following post: "${post}". The question, crafted to ignite discussion, can be positioned either as the initial or final line of the post. Ensure that the question you introduce aligns with the post's context and has the potential to make the post more engaging. Remember, your aim to make minimal changes, so show the question and post together.`;
         break;
       default:
         prompt = `Default prompt for optimizing post`;

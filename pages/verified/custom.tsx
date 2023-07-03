@@ -40,9 +40,11 @@ export default function Home() {
   const [customPrompt, setCustomPrompt] = useState("");
   const [tab, setTab] = useState("custom");
   const { data: session, status } = useSession();
+  const clickCount = useRef(0);
 
   const handleButtonClick = () => {
-    if (status !== "authenticated") {
+    clickCount.current += 1; // Increment clickCount on each click
+    if (status !== "authenticated" && clickCount.current >= 3) {
       setTimeout(() => {
         setShowPopup(true);
       }, 3000);

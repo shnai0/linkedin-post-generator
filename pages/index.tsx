@@ -3,8 +3,6 @@ import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
 import CustomButton from "@/components/CustomButton"; // adjust the import path according to your file structure
 import { useSession } from "next-auth/react";
-
-import { Ranking } from "@/components/Ranking";
 import { rank } from "@/lib/linkedin-algorithm";
 import { Toaster, toast } from "react-hot-toast";
 import LoadingDots from "@/components/LoadingDots";
@@ -37,9 +35,11 @@ export default function Home() {
   const [customPrompt, setCustomPrompt] = useState("");
   const [tab, setTab] = useState("vibe"); // Default to "vibe" tab
   const { data: session, status } = useSession();
+  const clickCount = useRef(0);
 
   const handleButtonClick = () => {
-    if (status !== "authenticated") {
+    clickCount.current += 1; // Increment clickCount on each click
+    if (status !== "authenticated" && clickCount.current >= 3) {
       setTimeout(() => {
         setShowPopup(true);
       }, 3000);

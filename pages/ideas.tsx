@@ -37,14 +37,17 @@ export default function Home() {
   const [customPrompt, setCustomPrompt] = useState("");
   const [tab, setTab] = useState("ideas"); // Default to "vibe" tab
   const { data: session, status } = useSession();
+  const clickCount = useRef(0);
 
   const handleButtonClick = () => {
-    if (status !== "authenticated") {
+    clickCount.current += 1; // Increment clickCount on each click
+    if (status !== "authenticated" && clickCount.current >= 3) {
       setTimeout(() => {
         setShowPopup(true);
       }, 3000);
     }
   };
+
   // const [hasVideo, setHasVideo] = useState<boolean>(false);
   // const [hasCarousel, setHasCarousel] = useState<boolean>(false);
 

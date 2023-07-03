@@ -13,9 +13,9 @@ function classNames(...classes: string[]) {
 export type VibeType2 =
   | "➕ Add Hashtags"
   | "➕ Add Emoji"
-  | "➕ Add a list"
-  | "➕ Add numbers"
-  | "➕ Add question";
+  | "➕ Add a List"
+  | "➕ Add Stats"
+  | "➕ Add a Question";
 
 interface DropDown2Props {
   vibe2: VibeType2;
@@ -25,9 +25,9 @@ interface DropDown2Props {
 let vibes2: VibeType2[] = [
   "➕ Add Hashtags",
   "➕ Add Emoji",
-  "➕ Add a list",
-  "➕ Add numbers",
-  "➕ Add question",
+  "➕ Add a List",
+  "➕ Add Stats",
+  "➕ Add a Question",
 ];
 
 export default function DropDown2({ vibe2, setVibe2 }: DropDown2Props) {
