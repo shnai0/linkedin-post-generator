@@ -13,6 +13,7 @@ import Nav from "@/components/Nav";
 import Link from "next/link";
 import CustomButton from "@/components/CustomButton";
 import Popup from "@/components/Popup";
+import { useSession } from "next-auth/react";
 import {
   FaTwitter,
   FaLinkedin,
@@ -38,10 +39,14 @@ export default function Home() {
   const [input, setInput] = useState<string>("");
   const [tab, setTab] = useState("template"); // Default to "vibe" tab
 
+  const { data: session, status } = useSession();
+
   const handleButtonClick = () => {
-    setTimeout(() => {
-      setShowPopup(true);
-    }, 3000);
+    if (status !== "authenticated") {
+      setTimeout(() => {
+        setShowPopup(true);
+      }, 3000);
+    }
   };
 
   // const [hasVideo, setHasVideo] = useState<boolean>(false);

@@ -11,6 +11,7 @@ import DropDown2, { VibeType2 } from "@/components/DropDown2";
 import Footer from "@/components/Footer";
 import Nav from "@/components/Nav";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 import Popup from "@/components/Popup";
 import {
   FaTwitter,
@@ -33,11 +34,14 @@ export default function Home() {
   const [vibe2, setVibe2] = useState<VibeType2>("➕ Add Hashtags");
   const [showPopup, setShowPopup] = useState(false);
   const [tab, setTab] = useState("enhancer"); // Default to "vibe" tab
+  const { data: session, status } = useSession();
 
   const handleButtonClick = () => {
-    setTimeout(() => {
-      setShowPopup(true);
-    }, 3000);
+    if (status !== "authenticated") {
+      setTimeout(() => {
+        setShowPopup(true);
+      }, 3000);
+    }
   };
 
   // const [hasVideo, setHasVideo] = useState<boolean>(false);

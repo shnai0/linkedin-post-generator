@@ -1,8 +1,8 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
-import CustomButton from "@/components/CustomButton";
-
+import { Note } from "@/components/Note";
+import { Post } from "@/components/Post";
 import { Ranking } from "@/components/Ranking";
 import { rank } from "@/lib/linkedin-algorithm";
 import { Toaster, toast } from "react-hot-toast";
@@ -11,8 +11,10 @@ import DropDown, { VibeType } from "@/components/DropDown";
 import Footer from "@/components/Footer";
 import Nav from "@/components/Nav";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
 import Popup from "@/components/Popup";
+import CustomButton from "@/components/CustomButton";
+import { useSession } from "next-auth/react";
+
 import {
   FaTwitter,
   FaLinkedin,
@@ -30,12 +32,13 @@ export default function Home() {
     validations: [],
   });
   const [post, setPost] = useState<string>("");
+  const [note, setNote] = useState<string>("");
   const [media, setMedia] = useState<boolean>(false);
   const [vibe, setVibe] = useState<VibeType>("Story");
   const [showPopup, setShowPopup] = useState(false);
   const [isCustomPrompt, setIsCustomPrompt] = useState(false);
   const [customPrompt, setCustomPrompt] = useState("");
-  const [tab, setTab] = useState("ideas"); // Default to "vibe" tab
+  const [tab, setTab] = useState("custom");
   const { data: session, status } = useSession();
 
   const handleButtonClick = () => {
@@ -45,6 +48,7 @@ export default function Home() {
       }, 3000);
     }
   };
+
   // const [hasVideo, setHasVideo] = useState<boolean>(false);
   // const [hasCarousel, setHasCarousel] = useState<boolean>(false);
 
@@ -55,41 +59,17 @@ export default function Home() {
 
   // prompt for optimizing post
 
-  // add more vibes as needed
   const handlePrompt = () => {
-    let prompt;
-    switch (vibe) {
-      case "Story":
-        prompt = `Generate 10 ideas for posts based on topics in ${post}. If person select this ${vibe}, make sure the generatedideas are for post on formats story.  
-        There one line space between each idea and Each should start from new line. The story should be from the person`;
-
-        break;
-      case "Crisp":
-        prompt = `Generate 10 ideas for posts based on topics in ${post}. If person select this ${vibe}, make sure the generated ideas are for post on format of short list 
-        There one line space between each idea and Each should start from new line. The story should be from the person`;
-
-        break;
-
-      case "List":
-        prompt = `Generate 10 ideas for posts based on topics in ${post}. If person select this ${vibe}, make sure the generatedideas are for posts in frmat of lists, 10 things, 50 smth..  
-        There one line space between each idea and Each should start from new line. The story should be from the person`;
-
-        // Generate post using this prompt, based on ${post}. You are a LinkedinGPT, a large language model that generates viral posts for Linkedin.
-
-        break;
-      case "Unpopular opinion":
-        prompt = `Generate 10 ideas for posts based on topics in ${post}. If person select this ${vibe}, make sure the generatedideas are for posts in contradictory ideas..  
-        There one line space between each idea and Each should start from new line. The story should be from the person`;
-        break;
-
-      case "Case Study":
-        prompt = `Generate 10 ideas for posts based on topics in ${post}. If person select this ${vibe}, make sure the generatedideas are for posts in format of case studies.  
-        There one line space between each idea and Each should start from new line. The story should be from the person`;
-        break;
-      default:
-        prompt = `Default prompt for generating ideas`;
-        break;
+    // Ensure both "post" and "note" have values before proceeding
+    if (!post || !note) {
+      return; // Or handle this case differently, based on your needs
     }
+
+    // Now you can use both variables to construct your prompt
+    const prompt = `Generate new post following these rules ${note}, and based on topic in here ${post}. You are a LinkedinGPT, a large language model that generates viral posts for Linkedin. 
+
+  - Post must relate to what initially is inserted.`;
+
     return prompt;
   };
 
@@ -145,7 +125,7 @@ export default function Home() {
         <link rel="icon" href="👩‍💼" />
         <meta
           name="description"
-          content="See how your post performs against Linkedin alghoritm and generate better post with AI."
+          content="Boost your LinkedIn posts using our AI-powered generator. Test post performance against LinkedIn's algorithm and improve engagement."
         />
         <meta property="og:site_name" content="#1 Post Generator 🚀  " />
         <meta
@@ -157,7 +137,7 @@ export default function Home() {
         <meta name="linkedin:title" content="Linkedin Post Generator" />
         <meta
           name="linkedin:description"
-          content="See how your post performs against Linkedin alghoritm and generate better post with AI."
+          content="Boost your LinkedIn posts using our AI-powered generator. Test post performance against LinkedIn's algorithm and improve engagement."
         />
         <meta
           property="og:image"
@@ -193,9 +173,49 @@ export default function Home() {
                 Linkedin Post Generator 🚀
               </h1>
               <p className="mt-3 mb-10 text-center">
-                Generate awesome post ideas and get a lot of posts done. Time to
-                go viral. <br />
+                See how your post performs and generate a better one with AI.
+                Time to go viral. <br />
               </p>
+
+              {/* <div className="mt-4 mb-4 flex justify-center space-x-4">
+                  <Link href="/index/twitter">
+                    <button className="bg-blue-400 text-white flex items-center space-x-2 p-2 rounded">
+                      <FaTwitter />
+                      <span>Twitter</span>
+                    </button>
+                  </Link>
+
+                  <Link href="/index/linkedin">
+                    <button className="bg-blue-700 text-white flex items-center space-x-2 p-2 rounded">
+                      <FaLinkedin />
+                      <span>LinkedIn</span>
+                    </button>
+                  </Link>
+                  <Link href="/index/instagram">
+                    <button className="bg-pink-500 text-white flex items-center space-x-2 p-2 rounded">
+                      <FaInstagram />
+                      <span>Instagram</span>
+                    </button>
+                  </Link>
+                  <Link href="/index/devto">
+                    <button className="bg-black text-white flex items-center space-x-2 p-2 rounded">
+                      <FaDev />
+                      <span>Dev.to</span>
+                    </button>
+                  </Link>
+                  <Link href="/index/facebook">
+                    <button className="bg-blue-600 text-white flex items-center space-x-2 p-2 rounded">
+                      <FaFacebook />
+                      <span>Facebook</span>
+                    </button>
+                  </Link>
+                  <Link href="/index/reddit">
+                    <button className="bg-orange-500 text-white flex items-center space-x-2 p-2 rounded">
+                      <FaReddit />
+                      <span>Reddit</span>
+                    </button>
+                  </Link>
+                </div> */}
 
               <div className="flex flex-col md:flex-row w-full md:space-x-20">
                 <div className="flex md:w-1/2 flex-col">
@@ -208,25 +228,19 @@ export default function Home() {
                     `}</style>
                   </div>
 
-                  {/* // This is post component*/}
-
                   <div className="w-full mx-auto pt-6 ">
                     <div className="w-full">
                       <textarea
-                        maxLength={2000}
+                        maxLength={7000}
                         onChange={(e) => setPost(e.target.value)}
-                        placeholder="Type or copy your topic on which you plan to write posts"
-                        className="text-black w-full h-24 p-2 text-s bg-white border border-gray-300 rounded-md shadow-inner md:h-240"
+                        placeholder="Type or copy your post or idea here."
+                        className="text-black w-full h-48 p-2 text-s bg-white border border-gray-300 rounded-md shadow-inner md:h-240"
                       />
                     </div>
+                    <Note note={note} setNote={setNote} />
                   </div>
 
-                  <div className="flex mb-3 items-center space-x-3"></div>
-                  <div className="block">
-                    <DropDown vibe={vibe} setVibe={setVibe} />
-                  </div>
-
-                  <div className="my-4">
+                  <div className="">
                     <button
                       disabled={loading}
                       onClick={(e) => {
@@ -236,7 +250,7 @@ export default function Home() {
                       className="bg-blue-700 font-medium rounded-md w-full text-white px-4 py-2 hover:bg-blue-600 disabled:bg-blue-800"
                     >
                       {loading && <LoadingDots color="white" style="large" />}
-                      {!loading && `Generate list of ideas`}
+                      {!loading && `Generate new post `}
                     </button>
 
                     <Popup show={showPopup} setShowPopup={setShowPopup} />
@@ -252,7 +266,7 @@ export default function Home() {
                     <div className="my-1">
                       <div className="flex justify-between items-center pb-2 border-b border-gray-300">
                         <h2 className="text-xl font-bold">
-                          Your Generated Ideas
+                          Your Generated Post
                         </h2>
                       </div>
                       <div className="max-w-2xl my-4 mx-auto">
@@ -266,7 +280,7 @@ export default function Home() {
                                 }),
                               }),
                             ]);
-                            toast("Ideas copied to clipboard", {
+                            toast("Post copied to clipboard", {
                               icon: "📋",
                             });
                           }}

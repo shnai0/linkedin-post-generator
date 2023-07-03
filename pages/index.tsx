@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
 import CustomButton from "@/components/CustomButton"; // adjust the import path according to your file structure
+import { useSession } from "next-auth/react";
 
 import { Ranking } from "@/components/Ranking";
 import { rank } from "@/lib/linkedin-algorithm";
@@ -35,11 +36,14 @@ export default function Home() {
   const [isCustomPrompt, setIsCustomPrompt] = useState(false);
   const [customPrompt, setCustomPrompt] = useState("");
   const [tab, setTab] = useState("vibe"); // Default to "vibe" tab
+  const { data: session, status } = useSession();
 
   const handleButtonClick = () => {
-    setTimeout(() => {
-      setShowPopup(true);
-    }, 3000);
+    if (status !== "authenticated") {
+      setTimeout(() => {
+        setShowPopup(true);
+      }, 3000);
+    }
   };
 
   // const [hasVideo, setHasVideo] = useState<boolean>(false);

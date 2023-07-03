@@ -19,8 +19,8 @@ export default function Login() {
           }}
         />
       </div>
-      <div className="z-10 mt-[calc(30vh)] h-fit w-full max-w-md overflow-hidden border border-gray-900 rounded-lg sm:shadow-xl">
-        <div className="flex flex-col items-center justify-center space-y-3 bg-gray-800 px-4 py-6 pt-8 text-center sm:px-16">
+      <div className="z-10 mt-[calc(30vh)] h-fit w-full max-w-md overflow-hidden border border-blue-900 rounded-lg sm:shadow-xl">
+        <div className="flex flex-col items-center justify-center space-y-3 bg-blue-900 px-4 py-6 pt-8 text-center sm:px-16">
           <h3 className="text-xl text-white font-semibold">
             Sign in to Linkedin Post Generator
           </h3>
@@ -28,7 +28,7 @@ export default function Login() {
             Start generating posts with no limitations
           </p>
         </div>
-        <div className="flex flex-col bg-gray-800 px-4 py-8 sm:px-16">
+        <div className="flex flex-col bg-blue-900 px-4 py-8 sm:px-16">
           <button
             onClick={() => {
               signIn("google", {
