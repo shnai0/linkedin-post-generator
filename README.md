@@ -6,9 +6,10 @@ This project is an open-source LinkedIn post generator, powered by ChatGPT. It n
 
 This is a Next.js project bootstrapped with create-next-app. To get started:
 
-1. Clone the repository to your local machine.
-2. Install the necessary dependencies using `npm install`, `yarn install`, or `pnpm install`.
-3. Run the development server using `npm run dev`, `yarn dev`, or `pnpm dev`.
+1. Get your Open Api Key from https://platform.openai.com/account/api-keys and put it into .env file
+2. Clone the repository to your local machine.
+3. Install the necessary dependencies using `npm install`, `yarn install`, or `pnpm install`.
+4. Run the development server using `npm run dev`, `yarn dev`, or `pnpm dev`.
 
 Once the server is running, open http://localhost:3000 with your browser to see the result. You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
